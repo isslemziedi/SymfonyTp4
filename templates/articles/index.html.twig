@@ -1,0 +1,41 @@
+{# templates/articles/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Liste des Articles
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% endblock %}
+
+{% block body %}
+<body> {{ include('inc/navbar.html.twig')}} 
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-3">
+        <div class="container">
+            <a href="/" class="navbar-brand">Nadhem BelHadj</a> 
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav"> 
+                <span class="navbar-toggle-icon"></span> 
+            </button> 
+            <div class="collapse navbar-collapse" id="mobile-nav"> 
+                <ul class="navbar-nav ml-auto"> 
+                    <li class="nav-item"> <a href="/" class="nav-link">Home</a> </li> 
+                     <li class="nav-item"> <a href="{{ path('new_article') }}" class="nav-link">Ajouter article</a> </li>
+                </ul> 
+            </div> 
+        </div> 
+    </nav>
+
+   
+   {% if articles %} <table id="articles" class="table table-striped"> <thead> <tr> <th>Nom</th> <th>Prix</th> <th>Actions</th> </tr> </thead> <tbody> {% for article in articles %} <tr> <td>{{ article.nom }}</td> <td>{{ article.prix }}</td> <td> <a href="/article/{{ article.id }}" class="btn btn-dark">Détails</a>
+  <a href="/article/edit/{{ article.id }}" class="btn btn-dark">Modifier</a> <a href="/article/delete/{{ article.id }}" class="btn btn-danger" onclick="return confirm('Etes-vous sûr de supprimer cet article?');">Delete</a> </td>
+
+
+</td> </tr> {% endfor %} </tbody> </table> {% else %} <p>Aucun articles</p> {% endif %} {% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
+{% endblock %}
